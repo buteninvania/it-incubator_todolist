@@ -1,0 +1,29 @@
+.taskItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+.isDone {
+    opacity: 0.4;
+}
+
+.contentText {
+    background-color: #1d6565;
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    margin-right: 5px;
+    transition: .2s;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.contentText:hover {
+    box-shadow: 0 0 2px #111;
+}
+

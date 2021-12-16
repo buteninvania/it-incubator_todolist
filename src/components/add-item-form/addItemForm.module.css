@@ -1,0 +1,16 @@
+.form {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.input {
+    background-color: #1d6565;
+    font-size: 10px;
+    margin-right: 10px;
+    border: 0;
+    box-shadow: 0 1px 4px rgba(17, 17, 17, 0.66);
+    height: 20px;
+    font-family: 'Press Start 2P', cursive;
+    padding: 3px;
+}

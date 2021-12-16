@@ -1,0 +1,14 @@
+@keyframes todolistHeader {
+    0% {
+        color: #111;
+    }
+    25% {
+        color: #0deaea;
+    }
+    50% {
+        color: #111;
+    }
+    100% {
+        color: #0deaea;
+    }
+}

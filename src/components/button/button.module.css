@@ -1,0 +1,21 @@
+.button {
+    padding: 5px 10px;
+    margin: 0 2px;
+    background-color: rgba(45, 185, 106, 0.63);
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 0 4px rgba(17, 17, 17, 0.39);
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    transition: .4s;
+    height: 50%;
+}
+
+.button:hover {
+    background-color: aquamarine;
+}
+
+.activeFilter {
+    background-color: aquamarine;
+}
+
