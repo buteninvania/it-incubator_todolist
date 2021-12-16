@@ -13,8 +13,7 @@ function App() {
     /****************** Tasks Store *************/
 
     const [tasks, setTasks] = useState<TaskStateType>({
-        [toDoListId_01]: [{id: v1(), title: 'Hello', isDone: false}],
-        [toDoListId_02]: [{id: v1(), title: 'Hello', isDone: false}]
+        [toDoListId_01]: [{id: v1(), title: 'Сheck mail ;)', isDone: false}],
     })
 
     const addTask = (title: string, toDoListId: string) => {
@@ -43,8 +42,7 @@ function App() {
     /******************* ToDoLists Store *************/
 
     const [toDoLists, setToDoLists] = useState<Array<ToDoListType>>([
-        {id: toDoListId_01, title:'What to learn', filter: 'all'},
-        {id: toDoListId_02, title:'What to learn', filter: 'all'},
+        {id: toDoListId_01, title:'Tasks for today', filter: 'all'},
     ])
 
     const addToDoList = (title: string) => {
