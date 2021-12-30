@@ -8,12 +8,11 @@ import {AddItemForm} from './components/add-item-form/AddItemForm';
 function App() {
 
     const toDoListId_01 = v1()
-    const toDoListId_02 = v1()
 
     /****************** Tasks Store *************/
 
     const [tasks, setTasks] = useState<TaskStateType>({
-        [toDoListId_01]: [{id: v1(), title: 'Сheck mail ;)', isDone: false}],
+        [toDoListId_01]: [{id: v1(), title: 'Check mail ;)', isDone: false}],
     })
 
     const addTask = (title: string, toDoListId: string) => {
@@ -59,20 +58,21 @@ function App() {
 
     return (
         <div className="app-wrapper">
-
             <AddItemForm addItem={addToDoList} />
-            {toDoLists.map(toDoList => {
-                const filteredTask = toDoList.filter === "active" ? tasks[toDoList.id].filter(t => !t.isDone)
-                                   : toDoList.filter === "completed" ? tasks[toDoList.id].filter(t => t.isDone)
-                                   : tasks[toDoList.id]
-                return <TodoList key={toDoList.id} id={toDoList.id}
-                                 filter={toDoList.filter} title={toDoList.title}
-                                 tasks={filteredTask} removeToDoList={removeToDoList}
-                                 changeFilter={changeFilter} removeTask={removeTask}
-                                 addTask={addTask} changeTaskTitle={changeTaskTitle}
-                                 changeToDoListTitle={changeToDoListTitle} changeIsDone={changeIsDoneTask}
-                />
-            })}
+            <div className="todolist-wrapper">
+                {toDoLists.map(toDoList => {
+                    const filteredTask = toDoList.filter === "active" ? tasks[toDoList.id].filter(t => !t.isDone)
+                         : toDoList.filter === "completed" ? tasks[toDoList.id].filter(t => t.isDone)
+                            : tasks[toDoList.id]
+                    return <TodoList key={toDoList.id} id={toDoList.id}
+                                     filter={toDoList.filter} title={toDoList.title}
+                                     tasks={filteredTask} removeToDoList={removeToDoList}
+                                     changeFilter={changeFilter} removeTask={removeTask}
+                                     addTask={addTask} changeTaskTitle={changeTaskTitle}
+                                     changeToDoListTitle={changeToDoListTitle} changeIsDone={changeIsDoneTask}
+                    />
+                })}
+            </div>
         </div>
     );
 }

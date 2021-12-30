@@ -6,7 +6,7 @@ export const Button: React.FC<ButtonPropsType> = ({name, callBack, active}) => {
 
     const onClickHandler = () => callBack()
 
-    return <button className={!active ? s.button : s.button + " " + s.activeFilter} onClick={onClickHandler}>{name}</button>
+    return (<button className={!active ? s.button : s.button + " " + s.activeFilter} onClick={onClickHandler}>{name}</button>)
 };
 
 type ButtonPropsType = {
