@@ -4,10 +4,15 @@ import s from './todolist.module.css'
 import {CgCloseR} from 'react-icons/cg'
 import {FilterType, TaskType} from '../../App';
 import {AddItemForm} from '../add-item-form/AddItemForm';
-import {EditableSpan} from '../editable-span/EditableSpan';
 import { Button } from '../button/Button';
+import { EditableSpan } from '../editable-span/EditableSpan';
 
-export const TodoList: React.FC<TodoListPropsType> = ({title, tasks, removeTask, addTask, changeIsDone, id, removeToDoList, changeFilter, filter, changeTaskTitle, changeToDoListTitle}) => {
+export const TodoList: React.FC<TodoListPropsType> = React.memo(({title, tasks,
+                                                          removeTask, addTask,
+                                                          changeIsDone, id,
+                                                          removeToDoList, changeFilter,
+                                                          filter, changeTaskTitle,
+                                                          changeToDoListTitle}) => {
 
     const onChangeTodoListTitle = (title: string) => {
         changeToDoListTitle(id, title)
@@ -32,7 +37,7 @@ export const TodoList: React.FC<TodoListPropsType> = ({title, tasks, removeTask,
 
         </div>
     )
-}
+})
 
 type TodoListPropsType = {
     id: string

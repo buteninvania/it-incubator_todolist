@@ -6,7 +6,7 @@ import s from './addItemForm.module.css'
 
 /***********************AddItemForm**************************/
 
-export const AddItemForm: React.FC<AddItemFormPropsType> = ({addItem}) => {
+export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo(({addItem}) => {
 
     const [inputText, setInputText] = useState<string>('')
     const [error, setError] = useState<string>('')
@@ -38,7 +38,7 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = ({addItem}) => {
             {error && <Error text={error}/>}
         </div>
     )
-}
+})
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void

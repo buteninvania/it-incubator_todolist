@@ -62,8 +62,7 @@ function App() {
             <div className="todolist-wrapper">
                 {toDoLists.map(toDoList => {
                     const filteredTask = toDoList.filter === "active" ? tasks[toDoList.id].filter(t => !t.isDone)
-                         : toDoList.filter === "completed" ? tasks[toDoList.id].filter(t => t.isDone)
-                            : tasks[toDoList.id]
+                         : toDoList.filter === "completed" ? tasks[toDoList.id].filter(t => t.isDone) : tasks[toDoList.id]
                     return <TodoList key={toDoList.id} id={toDoList.id}
                                      filter={toDoList.filter} title={toDoList.title}
                                      tasks={filteredTask} removeToDoList={removeToDoList}

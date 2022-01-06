@@ -3,7 +3,7 @@ import {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent} from
 import React from 'react';
 import s from './textInput.module.css'
 
-export const TextInput: React.FC<SuperInputTextPropsType> = ({   type, onChange,
+export const TextInput: React.FC<SuperInputTextPropsType> = React.memo(({   type, onChange,
                                                                  onChangeText, onKeyPress,
                                                                  onEnter, error,
                                                                  className, spanClassName, ...restProps}) => {
@@ -33,7 +33,7 @@ export const TextInput: React.FC<SuperInputTextPropsType> = ({   type, onChange,
         />
         {error && <span className={finalSpanClassName}>{error}</span>}
     </>
-};
+});
 
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>

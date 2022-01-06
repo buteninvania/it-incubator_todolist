@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import { TextInput } from '../text-input/TextInput';
 import s from './editableSpan.module.css'
 
-export const EditableSpan: React.FC<EditableSpanPropsType> = ({onChangeSpan, title}) => {
+export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(({onChangeSpan, title}) => {
 
     const [editMode, setEditMode] = useState<boolean>(false)
     const [inputText, setInputText] = useState<string>('')
@@ -27,12 +27,16 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = ({onChangeSpan, tit
 
     return (
         <>
-            {editMode ? <TextInput className={s.input} onBlur={onBlurInputHandler} autoFocus
-                                   onChangeText={changeTextInputHandler} value={inputText} onEnter={keyPressEnterHandler}/>
-                      : <span className={s.span} onDoubleClick={onDoubleClickSpan}>{title}</span>}
+            {editMode ? <TextInput className={s.input}
+                                   onBlur={onBlurInputHandler}
+                                   autoFocus
+                                   onChangeText={changeTextInputHandler}
+                                   value={inputText}
+                                   onEnter={keyPressEnterHandler}/>
+                       : <span className={s.span} onDoubleClick={onDoubleClickSpan}>{title}</span>}
         </>
     )
-}
+})
 
 type EditableSpanPropsType = {
     onChangeSpan: (title: string) => void

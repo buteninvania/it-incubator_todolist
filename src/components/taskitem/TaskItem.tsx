@@ -8,7 +8,9 @@ import { DeleteSharp } from '@mui/icons-material';
 
 /*******************TaskItem component*********************/
 
-export const TaskItem: React.FC<TaskItemPropsType> = ({task, changeIsDone, onRemoveTaskHandler, toDoListId, changeTaskTitle}) => {
+export const TaskItem: React.FC<TaskItemPropsType> = React.memo(({task, changeIsDone, onRemoveTaskHandler, toDoListId, changeTaskTitle}) => {
+
+    console.log('task item')
 
     const onChangeIsDoneHandler = (e: MouseEvent<HTMLDivElement>) => {
         e.ctrlKey && changeIsDone(task.id, toDoListId)
@@ -23,7 +25,7 @@ export const TaskItem: React.FC<TaskItemPropsType> = ({task, changeIsDone, onRem
             <Button name={'X'} callBack={() => onRemoveTaskHandler(task.id, toDoListId)}/>
         </li>
     )
-};
+});
 
 type TaskItemPropsType = {
     toDoListId: string
