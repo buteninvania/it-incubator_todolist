@@ -78,7 +78,7 @@ function App() {
 
 export default App;
 
-type TaskStateType = {
+export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
 
