@@ -1,10 +1,10 @@
 import {Button} from '../button/Button';
 import React, {MouseEvent} from 'react';
 import s from './taskitem.module.css'
-import { TaskType } from '../../App';
 import {EditableSpan} from '../editable-span/EditableSpan';
 import {Checkbox, IconButton } from '@mui/material';
 import { DeleteSharp } from '@mui/icons-material';
+import { TaskType } from '../../state/task-reducer/task-reducer.types';
 
 /*******************TaskItem component*********************/
 

@@ -4,6 +4,7 @@ import './css/animations.css'
 import {TodoList} from './components/todolist/TodoList';
 import {v1} from 'uuid';
 import {AddItemForm} from './components/add-item-form/AddItemForm';
+import { TaskStateType } from './state/task-reducer/task-reducer.types';
 
 function App() {
 
@@ -78,20 +79,10 @@ function App() {
 
 export default App;
 
-export type TaskStateType = {
-    [key: string]: Array<TaskType>
-}
-
 export type ToDoListType = {
     id: string
     filter: FilterType
     title: string
-}
-
-export type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
 }
 
 export type FilterType = 'all' | 'completed' | 'active'

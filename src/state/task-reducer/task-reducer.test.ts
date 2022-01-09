@@ -4,8 +4,9 @@
 //The title of the problem should be changed (changeTaskTitle)
 
 import { v1 } from "uuid"
-import { TaskStateType } from "../App"
+import { addTodoListAC } from "../todolist-reducer"
 import {addTaskAC, changeIsDoneTaskAC, changeTaskTitleAC, removeTaskAC, taskReducer } from "./task-reducer"
+import { TaskStateType } from "./task-reducer.types"
 
 let initialState: TaskStateType
 
@@ -55,6 +56,7 @@ test('The task state needs to be changed (changeIsDoneTask)', () => {
     expect(newState[toDoListId_01][0].title).toBe('Check mail 0 ;)')
     expect(newState[toDoListId_01][0].isDone).toBe(true)
     expect(newState[toDoListId_01][1].isDone).toBe(true)
+    expect(newState[toDoListId_02][0].isDone).toBe(true)
     expect(newState[toDoListId_02].length).toBe(3)
 })
 
@@ -68,6 +70,21 @@ test('The title of the problem should be changed (changeTaskTitle)', () => {
     expect(newState[toDoListId_01][1].title).toBe('Check mail 1 ;)')
     expect(newState[toDoListId_01][0].isDone).toBe(false)
     expect(newState[toDoListId_02].length).toBe(3)
+})
+
+test('When adding a new list of tasks, a new array with tasks should be created in the task state (addTodoListAC)', () => {
+
+    const newState = taskReducer(initialState, addTodoListAC('new todolist'))
+
+    const keys = Object.keys(newState)
+    const newKey = keys.find(k => k !== toDoListId_01 && k !== toDoListId_02 )
+    if (!newKey) {
+        throw Error('no key')
+    }
+
+    expect(keys.length).toBe(3)
+    expect(newState[newKey]).toEqual([])
+
 })
 
 

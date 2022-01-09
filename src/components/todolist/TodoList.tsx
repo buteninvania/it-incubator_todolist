@@ -2,10 +2,11 @@ import React from 'react';
 import {TaskItem} from '../taskitem/TaskItem';
 import s from './todolist.module.css'
 import {CgCloseR} from 'react-icons/cg'
-import {FilterType, TaskType} from '../../App';
+import {FilterType} from '../../App';
 import {AddItemForm} from '../add-item-form/AddItemForm';
 import { Button } from '../button/Button';
 import { EditableSpan } from '../editable-span/EditableSpan';
+import { TaskType } from '../../state/task-reducer/task-reducer.types';
 
 export const TodoList: React.FC<TodoListPropsType> = React.memo(({title, tasks,
                                                           removeTask, addTask,
