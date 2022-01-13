@@ -21,7 +21,6 @@ test('ids should be equals', () => {
     expect(idFromTodolists).toBe(action.id);
 });
 
-
 test('property with todolistId should be deleted', () => {
     const startState: TaskStateType = {
         "todolistId1": [
