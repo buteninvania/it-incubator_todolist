@@ -31,18 +31,15 @@ import { v1 } from "uuid";
 import {AddTaskActionType, ChangeIsDoneTaskActionType, ChangeTaskTitleActionType, RemoveTaskActionType,
     TaskActionType, TaskStateType } from "./task-reducer.types";
 
-const toDoListId_01 = v1()
+const initialState: TaskStateType = {}
 
-const initialState: TaskStateType = {
-    [toDoListId_01]: [{id: v1(), title: 'Check mail ;)', isDone: false}]
-}
 
 export const addTaskAC = (title: string, toDoListId: string): AddTaskActionType => ({type: 'ADD_TASK', title, toDoListId})
 export const removeTaskAC = (id: string, toDoListId: string): RemoveTaskActionType => ({type: 'REMOVE_TASK', id, toDoListId})
 export const changeIsDoneTaskAC = (id: string, toDoListId: string): ChangeIsDoneTaskActionType => ({type: 'CHANGE_IS_DONE_TASK', id, toDoListId})
 export const changeTaskTitleAC = (id: string, toDoListId: string, title: string): ChangeTaskTitleActionType => ({type: 'CHANGE_TASK_TITLE', id, toDoListId, title})
 
-export const taskReducer = (state: TaskStateType, action: TaskActionType): TaskStateType => {
+export const taskReducer = (state: TaskStateType = initialState, action: TaskActionType): TaskStateType => {
     switch (action.type) {
         case 'ADD_TASK':
             return {...state, [action.toDoListId]: [ {id: v1(), title: action.title, isDone: false} , ...state[action.toDoListId]]}
