@@ -21,6 +21,7 @@ export const TextInput: React.FC<SuperInputTextPropsType> = React.memo(({   type
     const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ''}`
     const finalInputClassName = error ? `${s.errorInput} ${className}` : `${className}`
 
+    console.log('super-input')
 
     return <>
         <input

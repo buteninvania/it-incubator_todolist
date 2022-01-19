@@ -1,7 +1,7 @@
 import {TextInput} from '../text-input/TextInput';
 import {Button} from '../button/Button';
 import {Error} from '../Error';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import s from './addItemForm.module.css'
 
 /***********************AddItemForm**************************/
@@ -25,6 +25,8 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo(({addItem}
             setInputText('')
         }
     }
+
+    console.log('Add-Item-Form')
 
     return (
         <div className={s.form}>

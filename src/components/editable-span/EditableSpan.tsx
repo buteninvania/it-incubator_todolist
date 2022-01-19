@@ -24,6 +24,7 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(({onChan
         setInputText(title)
     }
 
+    console.log('editable-span')
 
     return (
         <>

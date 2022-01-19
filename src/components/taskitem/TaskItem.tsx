@@ -10,12 +10,13 @@ import { TaskType } from '../../state/task-reducer/task-reducer.types';
 
 export const TaskItem: React.FC<TaskItemPropsType> = React.memo(({task, changeIsDone, onRemoveTaskHandler, toDoListId, changeTaskTitle}) => {
 
-    console.log('task item')
-
     const onChangeIsDoneHandler = (e: MouseEvent<HTMLDivElement>) => {
+
         e.ctrlKey && changeIsDone(task.id, toDoListId)
     }
     const onChangeTaskTitle = (title: string) => changeTaskTitle(task.id, toDoListId, title)
+
+    console.log('task item')
 
     return (
         <li key={task.id} className={!task.isDone ? s.taskItem : s.taskItem + ' ' + s.isDone}>

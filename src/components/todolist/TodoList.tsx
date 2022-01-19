@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {TaskItem} from '../taskitem/TaskItem';
 import s from './todolist.module.css'
 import {CgCloseR} from 'react-icons/cg'
@@ -15,10 +15,13 @@ export const TodoList: React.FC<TodoListPropsType> = React.memo(({title, tasks,
                                                           filter, changeTaskTitle,
                                                           changeToDoListTitle}) => {
 
-    const onChangeTodoListTitle = (title: string) => {
-        changeToDoListTitle(id, title)
-    }
-    const onRemoveTaskHandler = (id: string, toDoListId: string) => removeTask(id, toDoListId)
+    const onChangeTodoListTitle = useCallback((title: string) => changeToDoListTitle(id, title), [])
+    const onRemoveTaskHandler = useCallback((id: string, toDoListId: string) => removeTask(id, toDoListId), [])
+
+    console.log('super-todolist')
+
+    const filteredTask = filter === "active" ? tasks.filter(t => !t.isDone) :
+                         filter === "completed" ? tasks.filter(t => t.isDone) : tasks
 
     return (
         <div className={s.wrapper}>
@@ -28,7 +31,7 @@ export const TodoList: React.FC<TodoListPropsType> = React.memo(({title, tasks,
             </h3>
             <AddItemForm addItem={(title: string) => addTask(title, id)}/>
             <ul className={s.itemsList}>
-                {tasks.map(t => <TaskItem toDoListId={id} task={t} key={t.id} changeIsDone={changeIsDone} onRemoveTaskHandler={onRemoveTaskHandler} changeTaskTitle={changeTaskTitle}/>)}
+                {filteredTask.map(t => <TaskItem toDoListId={id} task={t} key={t.id} changeIsDone={changeIsDone} onRemoveTaskHandler={onRemoveTaskHandler} changeTaskTitle={changeTaskTitle}/>)}
             </ul>
             <div className={s.btnWrapper}>
                 <Button active={filter === "all"} name={'All'} callBack={() => changeFilter('all', id)}/>
