@@ -15,8 +15,8 @@ export const TodoList: React.FC<TodoListPropsType> = React.memo(({title, tasks,
                                                           filter, changeTaskTitle,
                                                           changeToDoListTitle}) => {
 
-    const onChangeTodoListTitle = useCallback((title: string) => changeToDoListTitle(id, title), [])
-    const onRemoveTaskHandler = useCallback((id: string, toDoListId: string) => removeTask(id, toDoListId), [])
+    const onChangeTodoListTitle = useCallback((title: string) => changeToDoListTitle(id, title), [changeToDoListTitle, id])
+    const onRemoveTaskHandler = useCallback((id: string, toDoListId: string) => removeTask(id, toDoListId), [removeTask])
 
     console.log('super-todolist')
 

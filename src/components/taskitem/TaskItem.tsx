@@ -1,12 +1,35 @@
 import {Button} from '../button/Button';
 import React, {MouseEvent} from 'react';
-import s from './taskitem.module.css'
+import s from './Taskitem.module.css'
 import {EditableSpan} from '../editable-span/EditableSpan';
-import {Checkbox, IconButton } from '@mui/material';
-import { DeleteSharp } from '@mui/icons-material';
 import { TaskType } from '../../state/task-reducer/task-reducer.types';
 
-/*******************TaskItem component*********************/
+interface TaskItemPropsType {
+    /**
+     * From what list of tasks?
+     */
+    toDoListId: string
+    /**
+     * Pass task data
+     */
+    task: TaskType
+    /**
+     * @param id type: string (task id)
+     * @param toDoListId string (todolis id)
+     */
+    changeIsDone: (id: string, toDoListId: string) => void
+    /**
+     * @param id type: string (task id)
+     * @param idTodoList string (todolis id)
+     */
+    onRemoveTaskHandler: (id: string, idTodoList: string) => void
+    /**
+     * @param id
+     * @param toDoListId
+     * @param title
+     */
+    changeTaskTitle: (id: string, toDoListId: string, title: string) => void
+};
 
 export const TaskItem: React.FC<TaskItemPropsType> = React.memo(({task, changeIsDone, onRemoveTaskHandler, toDoListId, changeTaskTitle}) => {
 
@@ -28,12 +51,5 @@ export const TaskItem: React.FC<TaskItemPropsType> = React.memo(({task, changeIs
     )
 });
 
-type TaskItemPropsType = {
-    toDoListId: string
-    task: TaskType
-    changeIsDone: (id: string, toDoListId: string) => void
-    onRemoveTaskHandler: (id: string, idTodoList: string) => void
-    changeTaskTitle: (id: string, toDoListId: string, title: string) => void
-};
 
-/*************************************************************/
+

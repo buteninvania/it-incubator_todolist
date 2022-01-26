@@ -1,12 +1,20 @@
-import {TextInput} from '../text-input/TextInput';
-import {Button} from '../button/Button';
-import {Error} from '../Error';
-import React, {useCallback, useState} from 'react';
-import s from './addItemForm.module.css'
+import {TextInput} from '../text-input/TextInput'
+import {Button} from '../button/Button'
+import {Error} from '../Error'
+import React, {useCallback, useState} from 'react'
+import s from './AddItemForm.module.css'
 
-/***********************AddItemForm**************************/
+interface AddItemFormPropsType {
+    /** @param title the parameter must be a string */
+    addItem: (title: string) => void
+    /** Will placeholder be set for the text field? */
+    placeholder?: string
+}
 
-export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo(({addItem}) => {
+/**
+ * The main component that adds some text entity through the callback function
+ */
+export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo(({addItem, placeholder}) => {
 
     const [inputText, setInputText] = useState<string>('')
     const [error, setError] = useState<string>('')
@@ -16,7 +24,7 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo(({addItem}
         setInputText(text)
     }
 
-    const addTaskButtonHandler = () => {
+    const addTaskButtonHandler = useCallback(() => {
         if (inputText.trim()) {
             addItem(inputText.trim())
             setInputText('')
@@ -24,13 +32,13 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo(({addItem}
             setError('Enter something')
             setInputText('')
         }
-    }
+    }, [inputText, addItem])
 
     console.log('Add-Item-Form')
 
     return (
         <div className={s.form}>
-            <TextInput placeholder={'Enter text...'}
+            <TextInput placeholder={placeholder ? placeholder : 'Enter text...'}
                        className={error ? "error" : s.input}
                        type={'text'}
                        value={inputText}
@@ -41,9 +49,3 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo(({addItem}
         </div>
     )
 })
-
-type AddItemFormPropsType = {
-    addItem: (title: string) => void
-}
-
-/**********************************************************/

@@ -1,14 +1,13 @@
-import React, {useCallback, useReducer, useState} from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import './css/animations.css'
 import {TodoList} from './components/todolist/TodoList';
-import {v1} from 'uuid';
 import {AddItemForm} from './components/add-item-form/AddItemForm';
-import { TaskStateType } from './state/task-reducer/task-reducer.types';
-import {addTaskAC, taskReducer, removeTaskAC, changeIsDoneTaskAC, changeTaskTitleAC } from './state/task-reducer/task-reducer';
-import {addTodoListAC, changeTodoListFilterAC, changeTodoListTitleAC, removeTodoListAC, todoListReducer } from './state/todolist-reducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppRootState } from './state/store-redux';
+import {TaskStateType} from './state/task-reducer/task-reducer.types';
+import {addTaskAC, removeTaskAC, changeIsDoneTaskAC, changeTaskTitleAC } from './state/task-reducer/task-reducer';
+import {addTodoListAC, changeTodoListFilterAC, changeTodoListTitleAC, removeTodoListAC} from './state/todolist-reducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootState} from './state/store-redux';
 
 
 function AppWitchRedux() {
