@@ -1,7 +1,17 @@
-/***********************EditableSpan**************************/
 import React, {useState} from 'react';
 import { TextInput } from '../text-input/TextInput';
 import s from './editableSpan.module.css'
+
+export interface EditableSpanPropsType {
+    /**
+     * @param title - string, callback function that changes span title
+     */
+    onChangeSpan: (title: string) => void
+    /**
+     * init title of the editable span
+     */
+    title: string
+}
 
 export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(({onChangeSpan, title}) => {
 
@@ -38,10 +48,3 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(({onChan
         </>
     )
 })
-
-type EditableSpanPropsType = {
-    onChangeSpan: (title: string) => void
-    title: string
-}
-
-/**********************************************************/

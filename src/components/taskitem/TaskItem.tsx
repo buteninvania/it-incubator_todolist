@@ -4,7 +4,7 @@ import s from './Taskitem.module.css'
 import {EditableSpan} from '../editable-span/EditableSpan';
 import { TaskType } from '../../state/task-reducer/task-reducer.types';
 
-interface TaskItemPropsType {
+export interface TaskItemPropsType {
     /**
      * From what list of tasks?
      */
