@@ -1,12 +1,73 @@
-import React, { useCallback } from 'react';
+import React, {useCallback} from 'react';
 import {TaskItem} from '../taskitem/TaskItem';
-import s from './todolist.module.css'
-import {CgCloseR} from 'react-icons/cg'
+import s from './todolist.module.css';
+import {CgCloseR} from 'react-icons/cg';
 import {FilterType} from '../../App';
 import {AddItemForm} from '../add-item-form/AddItemForm';
-import { Button } from '../button/Button';
-import { EditableSpan } from '../editable-span/EditableSpan';
-import { TaskType } from '../../state/task-reducer/task-reducer.types';
+import {Button} from '../button/Button';
+import {EditableSpan} from '../editable-span/EditableSpan';
+import {TaskType} from '../../state/task-reducer/task-reducer.types';
+
+export type TodoListPropsType = {
+    /**
+     * todolist id
+     */
+    id: string
+    /**
+     * todolist title
+     */
+    title: string
+    /**
+     * array of tasks that belong to the current list
+     */
+    tasks: Array<TaskType>
+    /**
+     * callback function for remove task
+     * @param id - string
+     * @param toDoListId - todolist id
+     */
+    removeTask: (id: string, toDoListId: string) => void
+    /**
+     * callback function for remove todolist
+     * @param id - string
+     */
+    removeToDoList: (id: string) => void
+    /**
+     * callback function for to add a task
+     * @param title - string
+     * @param toDoListId - todolist id
+     */
+    addTask: (title: string, toDoListId: string) => void
+    /**
+     * callback function for to change the status of a task
+     * @param id - task id
+     * @param toDoListId - todolist id
+     */
+    changeIsDone: (id: string, toDoListId: string) => void
+    /**
+     * callback function for to change the filter of a todolist
+     * @param filter
+     * @param toDoListId
+     */
+    changeFilter: (filter: FilterType, toDoListId: string) => void
+    /**
+     * filter value
+     */
+    filter: FilterType
+    /**
+     * callback function for to change the title of a task
+     * @param id - task id
+     * @param toDoListId - todolist id
+     * @param title - task title
+     */
+    changeTaskTitle: (id: string, toDoListId: string, title: string) => void
+    /**
+     * callback function for to change the title of a todolist
+     * @param id - task id
+     * @param title - todolist id
+     */
+    changeToDoListTitle: (id: string, title: string) => void
+}
 
 export const TodoList: React.FC<TodoListPropsType> = React.memo(({title, tasks,
                                                           removeTask, addTask,
@@ -17,8 +78,6 @@ export const TodoList: React.FC<TodoListPropsType> = React.memo(({title, tasks,
 
     const onChangeTodoListTitle = useCallback((title: string) => changeToDoListTitle(id, title), [changeToDoListTitle, id])
     const onRemoveTaskHandler = useCallback((id: string, toDoListId: string) => removeTask(id, toDoListId), [removeTask])
-
-    console.log('super-todolist')
 
     const filteredTask = filter === "active" ? tasks.filter(t => !t.isDone) :
                          filter === "completed" ? tasks.filter(t => t.isDone) : tasks
@@ -42,17 +101,3 @@ export const TodoList: React.FC<TodoListPropsType> = React.memo(({title, tasks,
         </div>
     )
 })
-
-type TodoListPropsType = {
-    id: string
-    title: string
-    tasks: Array<TaskType>
-    removeTask: (id: string, toDoListId: string) => void
-    removeToDoList: (id: string) => void
-    addTask: (title: string, toDoListId: string) => void
-    changeIsDone: (id: string, toDoListId: string) => void
-    changeFilter: (filter: FilterType, toDoListId: string) => void
-    filter: FilterType
-    changeTaskTitle: (id: string, toDoListId: string, title: string) => void
-    changeToDoListTitle: (id: string, title: string) => void
-}
