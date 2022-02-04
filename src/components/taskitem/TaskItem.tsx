@@ -2,7 +2,7 @@ import {Button} from '../button/Button';
 import React, {MouseEvent} from 'react';
 import s from './Taskitem.module.css'
 import {EditableSpan} from '../editable-span/EditableSpan';
-import { TaskType } from '../../state/task-reducer/task-reducer.types';
+import {TaskItemType, TaskStatuses} from '../../api/todolist-api';
 
 export interface TaskItemPropsType {
     /**
@@ -12,12 +12,13 @@ export interface TaskItemPropsType {
     /**
      * Pass task data
      */
-    task: TaskType
+    task: TaskItemType
     /**
      * @param id type: string (task id)
      * @param toDoListId string (todolis id)
+     * @param status enum TaskStatuses (task status)
      */
-    changeIsDone: (id: string, toDoListId: string) => void
+    changeIsDone: (id: string, toDoListId: string, status: TaskStatuses) => void
     /**
      * @param id type: string (task id)
      * @param idTodoList string (todolis id)
@@ -31,20 +32,28 @@ export interface TaskItemPropsType {
     changeTaskTitle: (id: string, toDoListId: string, title: string) => void
 };
 
-export const TaskItem: React.FC<TaskItemPropsType> = React.memo(({task, changeIsDone, onRemoveTaskHandler, toDoListId, changeTaskTitle}) => {
+export const TaskItem: React.FC<TaskItemPropsType> = React.memo(({
+                                                                     task,
+                                                                     changeIsDone,
+                                                                     onRemoveTaskHandler,
+                                                                     toDoListId,
+                                                                     changeTaskTitle
+                                                                 }) => {
 
     const onChangeIsDoneHandler = (e: MouseEvent<HTMLDivElement>) => {
-
-        e.ctrlKey && changeIsDone(task.id, toDoListId)
+        task.status === TaskStatuses.InProgress && e.ctrlKey ? changeIsDone(task.id, toDoListId, TaskStatuses.Completed)
+            : changeIsDone(task.id, toDoListId, TaskStatuses.InProgress)
     }
+
     const onChangeTaskTitle = (title: string) => changeTaskTitle(task.id, toDoListId, title)
 
     console.log('task item')
 
     return (
-        <li key={task.id} className={!task.isDone ? s.taskItem : s.taskItem + ' ' + s.isDone}>
+        <li key={task.id}
+            className={task.status === TaskStatuses.InProgress ? s.taskItem : s.taskItem + ' ' + s.isDone}>
             <div className={s.contentText} onClick={onChangeIsDoneHandler}>
-                <EditableSpan onChangeSpan={onChangeTaskTitle} title={task.title} />
+                <EditableSpan onChangeSpan={onChangeTaskTitle} title={task.title}/>
             </div>
             <Button name={'X'} callBack={() => onRemoveTaskHandler(task.id, toDoListId)}/>
         </li>

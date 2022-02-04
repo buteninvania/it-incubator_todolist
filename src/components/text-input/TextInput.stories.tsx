@@ -1,7 +1,6 @@
-import { action } from "@storybook/addon-actions";
-import { Meta, Story } from "@storybook/react";
-import { TaskItem } from "../taskitem/TaskItem";
-import {SuperInputTextPropsType, TextInput } from "./TextInput";
+import {action} from '@storybook/addon-actions';
+import {Meta, Story} from '@storybook/react';
+import {SuperInputTextPropsType, TextInput} from './TextInput';
 
 export default {
     title: 'Todolist/TextInput',
@@ -11,7 +10,7 @@ export default {
             description: 'callback function on text changes in input'
         },
         onEnter: {
-            description: "callback function after pressing the 'Enter' button"
+            description: 'callback function after pressing the \'Enter\' button'
         },
         error: {
             description: 'Have an error? Show "span" with an error',

@@ -1,6 +1,7 @@
 import {ComponentMeta, ComponentStory, Meta, Story} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import {TaskItem, TaskItemPropsType} from './TaskItem';
+import {TaskPrioritys, TaskStatuses } from '../../api/todolist-api';
 
 export default {
     title: 'Todolist/TaskItem',
@@ -23,6 +24,8 @@ export const TaskIsDoneExample = Template.bind({})
 
 TaskIsDoneExample.args = {
     ...baseArgs,
-    task: {id: '1', isDone: false, title: 'Learn React'},
+    task: {id: '1', title: 'Learn typescript', status: TaskStatuses.InProgress,
+        order: 0, todoListId: 'todolistId1', addedDate: '', description: '',
+        completed: false, deadline: '', priority: TaskPrioritys.Hi, startDate: ''},
     toDoListId: 'todoListId',
 }

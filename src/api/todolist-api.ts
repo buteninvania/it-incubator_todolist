@@ -10,9 +10,9 @@ type BaseResponseType<D = {}> = {
 }
 
 /** todolist response type */
-export type TodoListResponseType = {
+export type TodoListType = {
     id: string
-    addedDate: Date
+    addedDate: string
     order: number
     title: string
 }
@@ -24,19 +24,36 @@ type GetTaskResponseType = {
     totalCount: number
 }
 
+/** task statuses */
+export enum TaskStatuses {
+    New = 0,
+    InProgress = 1,
+    Completed = 2,
+    Draft = 3
+}
+
+/** task priority */
+export enum TaskPrioritys {
+    Low = 0,
+    Middle = 1,
+    Hi = 2,
+    Urgently = 3,
+    Later = 4
+}
+
 /** task type from the server */
 export type TaskItemType = {
     description: string
     title: string
     completed: boolean
-    status: number
-    priority: number
-    startDate: Date
-    deadline: Date
+    status: TaskStatuses
+    priority: TaskPrioritys
+    startDate: string
+    deadline: string
     id: string
     todoListId: string
     order: number
-    addedDate: Date
+    addedDate: string
 }
 
 /**
@@ -48,7 +65,7 @@ export const todolistAPI = {
      *  method: GET
      *  response: Array<TodoListResponseType> as array of object
      *  method to get list of task list */
-    getTodos: () => instance.get<TodoListResponseType[]>('todo-lists')
+    getTodos: () => instance.get<TodoListType[]>('todo-lists')
         .then(res => res.data),
     /**
      * url: https://social-network.samuraijs.com/api/1.1/todo-lists
@@ -58,8 +75,8 @@ export const todolistAPI = {
      * response: BaseResponseType where data TodoListResponseType
      * method to create a new task list
      */
-    createTodo: (title: string) => instance.post<BaseResponseType<{ item: TodoListResponseType }>,
-        AxiosResponse<BaseResponseType<TodoListResponseType>>, { title: string }>('todo-lists', {title})
+    createTodo: (title: string) => instance.post<BaseResponseType<{ item: TodoListType }>,
+        AxiosResponse<BaseResponseType<TodoListType>>, { title: string }>('todo-lists', {title})
         .then(res => res.data),
     /**
      * url: https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}
@@ -79,8 +96,8 @@ export const todolistAPI = {
      * response: BaseResponseType
      * method to update to-do list title
      */
-    updateTodolistTitle: (todolistId: string, title: string) => instance.put<BaseResponseType<{ item: TodoListResponseType }>,
-        AxiosResponse<BaseResponseType<{ item: TodoListResponseType }>>, { title: string }>(`todo-lists/${todolistId}`, {title})
+    updateTodolistTitle: (todolistId: string, title: string) => instance.put<BaseResponseType<{ item: TodoListType }>,
+        AxiosResponse<BaseResponseType<{ item: TodoListType }>>, { title: string }>(`todo-lists/${todolistId}`, {title})
         .then(res => res.data),
     /**
      * url: https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}/tasks

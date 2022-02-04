@@ -1,6 +1,7 @@
 import {action} from '@storybook/addon-actions';
 import {Meta, Story} from '@storybook/react';
 import {v1} from 'uuid';
+import {TaskPrioritys, TaskStatuses } from '../../api/todolist-api';
 import {TodoList, TodoListPropsType} from './TodoList';
 
 export default {
@@ -67,10 +68,18 @@ export const TodoListStory = Template.bind({})
 TodoListStory.args = {
     ...baseArgs,
     tasks: [
-        {id: v1(), title: 'Check mail ;)', isDone: false},
-        {id: v1(), title: 'Check mail ;)', isDone: false},
-        {id: v1(), title: 'Check mail ;)', isDone: false},
-        {id: v1(), title: 'Check mail ;)', isDone: false}
+        {id: v1(), title: 'Learn typescript', status: TaskStatuses.InProgress,
+        order: 0, todoListId: 'todolistId1', addedDate: '', description: '',
+        completed: false, deadline: '', priority: TaskPrioritys.Hi, startDate: ''},
+        {id: v1(), title: 'Learn typescript', status: TaskStatuses.InProgress,
+        order: 0, todoListId: 'todolistId1', addedDate: '', description: '',
+        completed: false, deadline: '', priority: TaskPrioritys.Hi, startDate: ''},
+        {id: v1(), title: 'Learn typescript', status: TaskStatuses.InProgress,
+        order: 0, todoListId: 'todolistId1', addedDate: '', description: '',
+        completed: false, deadline: '', priority: TaskPrioritys.Hi, startDate: ''},
+        {id: v1(), title: 'Learn typescript', status: TaskStatuses.InProgress,
+        order: 0, todoListId: 'todolistId1', addedDate: '', description: '',
+        completed: false, deadline: '', priority: TaskPrioritys.Hi, startDate: ''}
     ],
     id: v1()
 }

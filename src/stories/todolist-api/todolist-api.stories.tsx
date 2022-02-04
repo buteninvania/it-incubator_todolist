@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import {TaskItemType, todolistAPI, TodoListResponseType} from '../../api/todolist-api'
+import {TaskItemType, todolistAPI, TodoListType} from '../../api/todolist-api'
 
 export default {
     title: 'API'
 }
 
 export const GetTodolists = () => {
-    const [state, setState] = useState<TodoListResponseType[] | null>(null)
+    const [state, setState] = useState<TodoListType[] | null>(null)
     useEffect(() => {
         todolistAPI.getTodos()
             .then(res => {
@@ -19,7 +19,7 @@ export const GetTodolists = () => {
 }
 
 export const CreateTodolist = () => {
-    const [state, setState] = useState<TodoListResponseType[] | null>(null)
+    const [state, setState] = useState<TodoListType[] | null>(null)
     const [inputValue, setInputValue] = useState<string>('')
 
     const createTodolist = async () => {
@@ -42,7 +42,7 @@ export const CreateTodolist = () => {
 }
 
 export const DeleteTodolist = () => {
-    const [state, setState] = useState<TodoListResponseType[] | null>(null)
+    const [state, setState] = useState<TodoListType[] | null>(null)
     const [loader, setLoader] = useState<boolean>(false)
     useEffect(() => {
         todolistAPI.getTodos().then(res => setState(res))
@@ -68,7 +68,7 @@ export const DeleteTodolist = () => {
 }
 
 export const UpdateTodolistTitle = () => {
-    const [state, setState] = useState<TodoListResponseType[] | null>(null)
+    const [state, setState] = useState<TodoListType[] | null>(null)
     const [inputValue, setInputValue] = useState<string>('')
     useEffect(() => {
         todolistAPI.getTodos().then(res => setState(res))
@@ -103,7 +103,7 @@ export const UpdateTodolistTitle = () => {
 export const GetTasks = () => {
 
     const [tasks, setTasks] = useState<TaskItemType[] | null>(null)
-    const [todoLists, setTodoLists] = useState<TodoListResponseType[] | null>(null)
+    const [todoLists, setTodoLists] = useState<TodoListType[] | null>(null)
 
     useEffect(() => {
         todolistAPI.getTodos().then(res => setTodoLists(res))
@@ -125,7 +125,7 @@ export const GetTasks = () => {
 export const CreateTask = () => {
 
     const [inputValue, setInputValue] = useState<string>('')
-    const [todolists, setTodoLists] = useState<TodoListResponseType[] | null>(null)
+    const [todolists, setTodoLists] = useState<TodoListType[] | null>(null)
     const [tasks, setTasks] = useState<TaskItemType[] | null>(null)
 
     useEffect(() => {
@@ -151,7 +151,7 @@ export const CreateTask = () => {
 
 export const DeleteTask = () => {
 
-    const [todolists, setTodoLists] = useState<TodoListResponseType[] | null>(null)
+    const [todolists, setTodoLists] = useState<TodoListType[] | null>(null)
     const [tasks, setTasks] = useState<TaskItemType[] | null>(null)
 
     useEffect(() => {
