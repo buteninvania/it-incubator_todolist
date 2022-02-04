@@ -1,8 +1,8 @@
 import {TextInput} from '../text-input/TextInput'
 import {Button} from '../button/Button'
-import {Error} from '../Error'
 import React, {useCallback, useState} from 'react'
 import s from './AddItemForm.module.css'
+import {Error} from './../error/Error'
 
 interface AddItemFormPropsType {
     /** @param title the parameter must be a string */

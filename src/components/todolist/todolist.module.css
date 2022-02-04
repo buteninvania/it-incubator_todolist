@@ -1,10 +1,10 @@
-/*******************TodoList Styles**********************/
-
 .wrapper {
     margin-right: 10px;
+    max-width: 300px;
     padding: 20px;
     box-shadow: 0 1px 6px #111;
     border-radius: 10px;
+    position: relative;
 }
 
 .wrapper ul {
@@ -16,7 +16,6 @@
     font-size: 14px;
     display: flex;
     align-items: center;
-
 }
 
 .header span {
@@ -76,8 +75,8 @@
 .closeSvg {
     color: rgba(252, 5, 83, 0.27);
     cursor: pointer;
-    position: relative;
-    left: 300px;
+    position: absolute;
+    right: 20px;
     transition: .3s;
 }
 
@@ -85,6 +84,5 @@
     color: rgba(252, 5, 83, 0.6);
 }
 
-/********************************************************/
 
 
