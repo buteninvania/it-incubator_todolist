@@ -1,3 +1,4 @@
+import { v1 } from 'uuid';
 import {TaskItemType, TaskPrioritys, TaskStatuses} from '../../api/todolist-api';
 import {
     AddTaskActionType,
@@ -26,7 +27,7 @@ export const changeTaskTitleAC = (id: string, toDoListId: string, title: string)
 /** create new task function (function creator)*/
 const creteTask = (title: string): TaskItemType => {
     return {
-        id: '1', title, status: TaskStatuses.InProgress,
+        id: v1(), title, status: TaskStatuses.New,
         order: 0, todoListId: 'todolistId1', addedDate: '', description: '',
         completed: false, deadline: '', priority: TaskPrioritys.Hi, startDate: ''
     }

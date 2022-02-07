@@ -41,8 +41,11 @@ export const TaskItem: React.FC<TaskItemPropsType> = React.memo(({
                                                                  }) => {
 
     const onChangeIsDoneHandler = (e: MouseEvent<HTMLDivElement>) => {
-        task.status === TaskStatuses.InProgress && e.ctrlKey ? changeIsDone(task.id, toDoListId, TaskStatuses.Completed)
-            : changeIsDone(task.id, toDoListId, TaskStatuses.InProgress)
+        if(e.ctrlKey) {
+            task.status === TaskStatuses.New
+                ? changeIsDone(task.id, toDoListId, TaskStatuses.Completed)
+                : changeIsDone(task.id, toDoListId, TaskStatuses.New)
+        }
     }
 
     const onChangeTaskTitle = (title: string) => changeTaskTitle(task.id, toDoListId, title)
@@ -51,7 +54,7 @@ export const TaskItem: React.FC<TaskItemPropsType> = React.memo(({
 
     return (
         <li key={task.id}
-            className={task.status === TaskStatuses.InProgress ? s.taskItem : s.taskItem + ' ' + s.isDone}>
+            className={task.status === TaskStatuses.New ? s.taskItem : s.taskItem + ' ' + s.isDone}>
             <div className={s.contentText} onClick={onChangeIsDoneHandler}>
                 <EditableSpan onChangeSpan={onChangeTaskTitle} title={task.title}/>
             </div>

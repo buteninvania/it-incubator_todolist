@@ -82,7 +82,7 @@ export const TodoList: React.FC<TodoListPropsType> = React.memo(({
     const onChangeTodoListTitle = useCallback((title: string) => changeToDoListTitle(id, title), [changeToDoListTitle, id])
     const onRemoveTaskHandler = useCallback((id: string, toDoListId: string) => removeTask(id, toDoListId), [removeTask])
 
-    const filteredTask = filter === 'active' ? tasks.filter(t => t.status === TaskStatuses.InProgress) :
+    const filteredTask = filter === 'active' ? tasks.filter(t => t.status === TaskStatuses.New) :
         filter === 'completed' ? tasks.filter(t => t.status === TaskStatuses.Completed) : tasks
 
     return (
