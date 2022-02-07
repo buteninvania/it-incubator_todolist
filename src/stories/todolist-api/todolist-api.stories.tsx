@@ -186,3 +186,35 @@ export const DeleteTask = () => {
     )
 }
 
+export const UpdateTask = () => {
+
+    const [inputValue, setInputValue] = useState<string>('')
+    const [todolists, setTodoLists] = useState<TodoListType[] | null>(null)
+    const [tasks, setTasks] = useState<TaskItemType[] | null>(null)
+
+    useEffect(() => {
+        todolistAPI.getTodos().then(res => setTodoLists(res))
+    }, [])
+
+    const getTasks = async (todolistID: string) => {
+        const response = await todolistAPI.getTasks(todolistID)
+        setTasks(response)
+    }
+
+    const updateTask = async (todolistID: string, taskID: string) => {
+        const response = await todolistAPI.updateTask(todolistID, taskID, inputValue)
+        if (response.resultCode === 0) {
+            const tasks = await todolistAPI.getTasks(todolistID)
+            setTasks(tasks)
+        }
+    }
+
+    return (
+        <div>
+            <input type="text" value={inputValue} onChange={(e) => setInputValue(e.currentTarget.value)}/>
+            {todolists && todolists.map(t => <div key={t.id} onClick={() => getTasks(t.id)}>{t.title}</div>)}
+            {tasks && tasks.map(t => <div key={t.id} onClick={() => updateTask(t.todoListId, t.id)}>{t.title}</div>)}
+        </div>
+    )
+}
+

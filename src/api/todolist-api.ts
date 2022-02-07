@@ -125,5 +125,13 @@ export const todolistAPI = {
      * method to remove task from to-do list
      */
     deleteTask: (todolistId: string, taskId: string) => instance.delete<BaseResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
+        .then(res => res.data),
+    /**
+     * url: https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}/tasks/${taskId}
+     * method: PUT
+     * response: object BaseResponseType and data: TaskItemType
+     * task name update method
+     */
+    updateTask: (todolistId: string, taskId: string, title: string) => instance.put<BaseResponseType<TaskItemType>>(`todo-lists/${todolistId}/tasks/${taskId}`, {title})
         .then(res => res.data)
 }
