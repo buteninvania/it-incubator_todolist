@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {TaskItem} from '../taskitem/TaskItem';
 import s from './todolist.module.css';
 import {CgCloseR} from 'react-icons/cg';
@@ -6,7 +6,9 @@ import {AddItemForm} from '../add-item-form/AddItemForm';
 import {Button} from '../button/Button';
 import {EditableSpan} from '../editable-span/EditableSpan';
 import {TaskItemType, TaskStatuses} from '../../api/todolist-api';
-import {FilterType} from '../../state/todolist-reducer/todolist-reducer';
+import { FilterType } from '../../state/todolist-reducer/todolist-reducer.types';
+import { useDispatch } from 'react-redux';
+import { fetchTasksTC } from '../../state/task-reducer/task-reducer';
 
 export type TodoListPropsType = {
     /**
@@ -79,6 +81,12 @@ export const TodoList: React.FC<TodoListPropsType> = React.memo(({
                                                                      changeToDoListTitle
                                                                  }) => {
 
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchTasksTC(id))
+    }, [])
+
     const onChangeTodoListTitle = useCallback((title: string) => changeToDoListTitle(id, title), [changeToDoListTitle, id])
     const onRemoveTaskHandler = useCallback((id: string, toDoListId: string) => removeTask(id, toDoListId), [removeTask])
 
@@ -100,8 +108,7 @@ export const TodoList: React.FC<TodoListPropsType> = React.memo(({
             <div className={s.btnWrapper}>
                 <Button active={filter === 'all'} name={'All'} callBack={() => changeFilter('all', id)}/>
                 <Button active={filter === 'active'} name={'Active'} callBack={() => changeFilter('active', id)}/>
-                <Button active={filter === 'completed'} name={'Completed'}
-                        callBack={() => changeFilter('completed', id)}/>
+                <Button active={filter === 'completed'} name={'Completed'} callBack={() => changeFilter('completed', id)}/>
             </div>
 
         </div>

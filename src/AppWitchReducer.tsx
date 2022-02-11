@@ -15,11 +15,11 @@ import {
     addTodoListAC,
     changeTodoListFilterAC,
     changeTodoListTitleAC,
-    FilterType,
     removeTodoListAC,
     todoListReducer
 } from './state/todolist-reducer/todolist-reducer';
 import {TaskPrioritys, TaskStatuses} from './api/todolist-api';
+import { FilterType } from './state/todolist-reducer/todolist-reducer.types';
 
 function AppWitchReducer() {
 

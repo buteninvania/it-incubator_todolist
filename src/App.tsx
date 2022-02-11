@@ -1,18 +1,16 @@
-import React, {useState} from 'react';
+ import React, {useState} from 'react';
 import './App.css';
 import './css/animations.css'
 import {TodoList} from './components/todolist/TodoList';
 import {v1} from 'uuid';
 import {AddItemForm} from './components/add-item-form/AddItemForm';
 import {TaskStateType} from './state/task-reducer/task-reducer.types';
-import {FilterType, ToDoListDomainType} from './state/todolist-reducer/todolist-reducer';
 import {TaskPrioritys, TaskStatuses} from './api/todolist-api';
+ import {FilterType, ToDoListDomainType } from './state/todolist-reducer/todolist-reducer.types';
 
 function App() {
 
     const toDoListId_01 = v1()
-
-    /****************** Tasks Store *************/
 
     const [tasks, setTasks] = useState<TaskStateType>({
         [toDoListId_01]: [
@@ -52,10 +50,6 @@ function App() {
         setTasks(copyState)
     }
 
-    /*************************************************/
-
-    /******************* ToDoLists Store *************/
-
     const [toDoLists, setToDoLists] = useState<Array<ToDoListDomainType>>([
         {id: toDoListId_01, title: 'Tasks for today', filter: 'all', addedDate: '', order: 0},
     ])
@@ -75,8 +69,6 @@ function App() {
         ...t,
         title: title
     } : t))
-
-    /*************************************************/
 
     return (
         <div className="app-wrapper">
