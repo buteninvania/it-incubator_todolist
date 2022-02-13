@@ -1,7 +1,7 @@
 import {v1} from 'uuid'
 import {TaskPrioritys, TaskStatuses} from '../../api/todolist-api'
 import {addTodoListAC, setTodolistsAC} from '../todolist-reducer/todolist-reducer'
-import {addTaskAC, changeIsDoneTaskAC, changeTaskTitleAC, removeTaskAC, setTasksAC, taskReducer} from './task-reducer'
+import {addTaskAC, removeTaskAC, setTasksAC, taskReducer, updateTaskAC} from './task-reducer'
 import {TaskStateType} from './task-reducer.types'
 
 let initialState: TaskStateType
@@ -50,11 +50,21 @@ beforeEach(() => {
 
 test('The task should be added to the list (addTask)', () => {
 
-    const newState = taskReducer(initialState, addTaskAC('write tests', toDoListId_01))
+    const newTask = {
+        id: v1(), title: 'Learn javascript', status: TaskStatuses.InProgress,
+        order: 0, todoListId: 'todolistId1', addedDate: '', description: '',
+        completed: false, deadline: '', priority: TaskPrioritys.Hi, startDate: ''
+    }
+
+    const newState = taskReducer(initialState, addTaskAC(toDoListId_01, {
+        id: v1(), title: 'Learn javascript', status: TaskStatuses.InProgress,
+        order: 0, todoListId: 'todolistId1', addedDate: '', description: '',
+        completed: false, deadline: '', priority: TaskPrioritys.Hi, startDate: ''
+    }))
 
     expect(newState[toDoListId_01].length).toBe(4)
-    expect(newState[toDoListId_01][0].title).toBe('write tests')
-    expect(newState[toDoListId_01][0].status).toBe(TaskStatuses.New)
+    expect(newState[toDoListId_01][0].title).toBe('Learn javascript')
+    expect(newState[toDoListId_01][0].status).toBe(TaskStatuses.InProgress)
     expect(newState[toDoListId_02].length).toBe(3)
 })
 
@@ -70,7 +80,7 @@ test('The task must be removed from the list (removeTask))', () => {
 
 test('The task state needs to be changed (changeIsDoneTask)', () => {
 
-    const newState = taskReducer(initialState, changeIsDoneTaskAC(initialState[toDoListId_01][0].id, toDoListId_01, TaskStatuses.Completed))
+    const newState = taskReducer(initialState, updateTaskAC(initialState[toDoListId_01][0].id, toDoListId_01, {status: TaskStatuses.Completed}))
 
     expect(newState[toDoListId_01].length).toBe(3)
     expect(newState[toDoListId_01][0].title).toBe('Learn typescript')
@@ -82,7 +92,7 @@ test('The task state needs to be changed (changeIsDoneTask)', () => {
 
 test('The title of the problem should be changed (changeTaskTitle)', () => {
 
-    const newState = taskReducer(initialState, changeTaskTitleAC(initialState[toDoListId_01][0].id, toDoListId_01, 'Hello!)'))
+    const newState = taskReducer(initialState, updateTaskAC(initialState[toDoListId_01][0].id, toDoListId_01, {title: 'Hello!)'}))
 
     expect(newState).not.toBe(initialState)
     expect(newState[toDoListId_01].length).toBe(3)
@@ -94,7 +104,14 @@ test('The title of the problem should be changed (changeTaskTitle)', () => {
 
 test('When adding a new list of tasks, a new array with tasks should be created in the task state (addTodoListAC)', () => {
 
-    const newState = taskReducer(initialState, addTodoListAC('new todolist'))
+    const newTodolist = {
+        id: '1',
+        addedDate: '',
+        order: 0,
+        title: 'new todolist',
+    }
+
+    const newState = taskReducer(initialState, addTodoListAC(newTodolist))
 
     const keys = Object.keys(newState)
     const newKey = keys.find(k => k !== toDoListId_01 && k !== toDoListId_02)
@@ -126,7 +143,7 @@ test('Tasks should be added to the state (setTasks)', () => {
 
     const action = setTasksAC([
         {
-            id: v1(), title:'title1', status: TaskStatuses.New,
+            id: v1(), title: 'title1', status: TaskStatuses.New,
             order: 0, todoListId: 'todolistId1', addedDate: '', description: '',
             completed: false, deadline: '', priority: TaskPrioritys.Hi, startDate: ''
         }

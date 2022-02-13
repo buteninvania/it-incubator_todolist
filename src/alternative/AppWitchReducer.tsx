@@ -1,25 +1,19 @@
 import React, {useReducer} from 'react';
-import './App.css';
+import '../App.css';
 import './css/animations.css'
-import {TodoList} from './components/todolist/TodoList';
+import {TodoList} from '../components/todolist/TodoList';
 import {v1} from 'uuid';
-import {AddItemForm} from './components/add-item-form/AddItemForm';
-import {
-    addTaskAC,
-    changeIsDoneTaskAC,
-    changeTaskTitleAC,
-    removeTaskAC,
-    taskReducer
-} from './state/task-reducer/task-reducer';
+import {AddItemForm} from '../components/add-item-form/AddItemForm';
+import {addTaskAC, removeTaskAC, taskReducer, updateTaskAC} from '../state/task-reducer/task-reducer';
 import {
     addTodoListAC,
     changeTodoListFilterAC,
     changeTodoListTitleAC,
     removeTodoListAC,
     todoListReducer
-} from './state/todolist-reducer/todolist-reducer';
-import {TaskPrioritys, TaskStatuses} from './api/todolist-api';
-import { FilterType } from './state/todolist-reducer/todolist-reducer.types';
+} from '../state/todolist-reducer/todolist-reducer';
+import {TaskPrioritys, TaskStatuses, todolistAPI} from '../api/todolist-api';
+import {FilterType} from '../state/todolist-reducer/todolist-reducer.types';
 
 function AppWitchReducer() {
 
@@ -33,17 +27,25 @@ function AppWitchReducer() {
         }]
     })
 
-    const addTask = (title: string, toDoListId: string) => taskDispatch(addTaskAC(title, toDoListId))
+    const addTask = (title: string, toDoListId: string) => {
+        todolistAPI.createTask(toDoListId, title)
+            .then(res => {
+                const task = res.data.item
+                taskDispatch(addTaskAC(toDoListId, task))
+            })
+
+    }
     const removeTask = (id: string, toDoListId: string) => taskDispatch(removeTaskAC(id, toDoListId))
-    const changeIsDoneTask = (id: string, toDoListId: string, status: TaskStatuses) => taskDispatch(changeIsDoneTaskAC(id, toDoListId, status))
-    const changeTaskTitle = (id: string, toDoListId: string, title: string) => taskDispatch(changeTaskTitleAC(id, toDoListId, title))
+    const changeIsDoneTask = (id: string, toDoListId: string, status: TaskStatuses) => taskDispatch(updateTaskAC(id, toDoListId, {status}))
+    const changeTaskTitle = (id: string, toDoListId: string, title: string) => taskDispatch(updateTaskAC(id, toDoListId, {title}))
 
     const [toDoLists, todoListDispatch] = useReducer(todoListReducer, [{
         id: toDoListId_01, title: 'What to learn', filter: 'all', addedDate: '', order: 0
     },])
 
     const addToDoList = (title: string) => {
-        const action = addTodoListAC(title)
+        const todolist = {id: toDoListId_01, title: 'What to learn', filter: 'all', addedDate: '', order: 0}
+        const action = addTodoListAC(todolist)
         todoListDispatch(action)
         taskDispatch(action)
     }

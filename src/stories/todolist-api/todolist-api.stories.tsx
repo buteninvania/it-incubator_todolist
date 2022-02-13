@@ -201,8 +201,8 @@ export const UpdateTask = () => {
         setTasks(response)
     }
 
-    const updateTask = async (todolistID: string, taskID: string) => {
-        const response = await todolistAPI.updateTask(todolistID, taskID, inputValue)
+    const updateTask = async (todolistID: string, t: TaskItemType) => {
+        const response = await todolistAPI.updateTask(todolistID, t.id, {...t, title: inputValue})
         if (response.resultCode === 0) {
             const tasks = await todolistAPI.getTasks(todolistID)
             setTasks(tasks)
@@ -213,7 +213,7 @@ export const UpdateTask = () => {
         <div>
             <input type="text" value={inputValue} onChange={(e) => setInputValue(e.currentTarget.value)}/>
             {todolists && todolists.map(t => <div key={t.id} onClick={() => getTasks(t.id)}>{t.title}</div>)}
-            {tasks && tasks.map(t => <div key={t.id} onClick={() => updateTask(t.todoListId, t.id)}>{t.title}</div>)}
+            {tasks && tasks.map(t => <div key={t.id} onClick={() => updateTask(t.todoListId, t)}>{t.title}</div>)}
         </div>
     )
 }

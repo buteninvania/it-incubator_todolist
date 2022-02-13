@@ -1,12 +1,12 @@
  import React, {useState} from 'react';
-import './App.css';
+import '../App.css';
 import './css/animations.css'
-import {TodoList} from './components/todolist/TodoList';
+import {TodoList} from '../components/todolist/TodoList';
 import {v1} from 'uuid';
-import {AddItemForm} from './components/add-item-form/AddItemForm';
-import {TaskStateType} from './state/task-reducer/task-reducer.types';
-import {TaskPrioritys, TaskStatuses} from './api/todolist-api';
- import {FilterType, ToDoListDomainType } from './state/todolist-reducer/todolist-reducer.types';
+import {AddItemForm} from '../components/add-item-form/AddItemForm';
+import {TaskStateType} from '../state/task-reducer/task-reducer.types';
+import {TaskPrioritys, TaskStatuses} from '../api/todolist-api';
+ import {FilterType, ToDoListDomainType } from '../state/todolist-reducer/todolist-reducer.types';
 
 function App() {
 

@@ -41,8 +41,19 @@ export enum TaskPrioritys {
     Later = 4
 }
 
-/** task type from the server */
-export type TaskItemType = {
+/** model type of task properties to be updated */
+export type TaskDomainModelUpdateType = {
+    description?: string
+    title?: string
+    completed?: boolean
+    status?: TaskStatuses
+    priority?: TaskPrioritys
+    startDate?: string
+    deadline?: string
+}
+
+/** model type for updating task data on the server */
+export type TaskModelUpdateType = {
     description: string
     title: string
     completed: boolean
@@ -50,6 +61,10 @@ export type TaskItemType = {
     priority: TaskPrioritys
     startDate: string
     deadline: string
+}
+
+/** task type from the server */
+export type TaskItemType = TaskModelUpdateType & {
     id: string
     todoListId: string
     order: number
@@ -76,7 +91,7 @@ export const todolistAPI = {
      * method to create a new task list
      */
     createTodo: (title: string) => instance.post<BaseResponseType<{ item: TodoListType }>,
-        AxiosResponse<BaseResponseType<TodoListType>>, { title: string }>('todo-lists', {title})
+        AxiosResponse<BaseResponseType<{ item: TodoListType }>>, { title: string }>('todo-lists', {title})
         .then(res => res.data),
     /**
      * url: https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}
@@ -132,6 +147,6 @@ export const todolistAPI = {
      * response: object BaseResponseType and data: TaskItemType
      * task name update method
      */
-    updateTask: (todolistId: string, taskId: string, title: string) => instance.put<BaseResponseType<TaskItemType>>(`todo-lists/${todolistId}/tasks/${taskId}`, {title})
+    updateTask: (todolistId: string, taskId: string, model: TaskModelUpdateType) => instance.put<BaseResponseType<TaskItemType>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
         .then(res => res.data)
 }
