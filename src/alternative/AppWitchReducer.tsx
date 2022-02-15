@@ -1,5 +1,5 @@
 import React, {useReducer} from 'react';
-import '../App.css';
+import './../app/App.css';
 import './css/animations.css'
 import {TodoList} from '../components/todolist/TodoList';
 import {v1} from 'uuid';

@@ -1,6 +1,6 @@
 import {Meta, Story} from '@storybook/react';
 import AppWitchRedux from './AppWitchRedux';
-import {ReduxStoreProviderDecorator} from './stories/decorators/ReduxStoreProviderDecorator';
+import {ReduxStoreProviderDecorator} from '../stories/decorators/ReduxStoreProviderDecorator';
 
 export default {
     title: 'Todolist/AppWitchRedux',
